@@ -2,15 +2,15 @@ import os
 import yara
 import hashlib
 import pefile
-import magic
+import filetype
 from datetime import datetime
+import sys
 
 class StaticAnalyzer:
     def __init__(self):
         # Set the rules path to the specific directory
         self.rules_path = r"C:\Users\firda\OneDrive - Strathmore University\Documents\Git1\Brainwave_Matrix_Intern_T2\rules\malware_signatures.yar"
         self.yara_rules = self._load_yara_rules()
-        self.file_magic = magic.Magic()
 
     def _load_yara_rules(self):
         """Load and compile YARA rules with better error handling"""
@@ -109,11 +109,13 @@ class StaticAnalyzer:
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
 
+        kind = filetype.guess(file_path)
+        file_type = kind.mime if kind else "unknown"
         results = {
             'file_info': {
                 'path': file_path,
                 'size': os.path.getsize(file_path),
-                'type': self.file_magic.from_file(file_path),
+                'type': file_type,
                 'hashes': self._calculate_hashes(file_path)
             },
             'pe_info': None,

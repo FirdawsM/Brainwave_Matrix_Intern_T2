@@ -1,4 +1,4 @@
 yara-python
-python-magic
+python-magic-bin
 pefile
 PyQt6
