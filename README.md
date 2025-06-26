@@ -47,6 +47,56 @@ A Python-based sandbox environment for analyzing malware samples in a controlled
 4. View static and behavioral analysis results in the terminal.
 5. (Optional) Check the `reports/` directory for generated reports.
 
+## Important Note on YARA Rules Path
+
+If you move or rename this project, or clone it to a new location, make sure that the path to the YARA rules directory is correct. By default, the project expects the rules to be in a folder named `rules` inside the project directory (e.g., `<your_project_folder>/rules`).
+
+If you encounter errors like:
+
+```
+Failed to load YARA rules: YARA rules file not found at ...
+```
+
+update the path in `detection/yara_scan.py` and `detection/static_analyzer.py` to match the location of your `rules` folder in your current workspace.
+
+## Requirements
+
+All required Python packages are listed in `requirements.txt`:
+
+```
+yara-python
+python-magic
+pefile
+PyQt6
+```
+
+Install them with:
+
+```
+pip install -r requirements.txt
+```
+
+## Installing YARA (System-wide)
+
+In addition to the Python package (`yara-python`), you may need to install the YARA binary for your operating system:
+
+**Windows:**
+1. Download the latest YARA release from the [official YARA GitHub releases](https://github.com/VirusTotal/yara/releases).
+2. Extract the ZIP and add the folder containing `yara.exe` to your system `PATH` (optional, for command-line use).
+
+**Linux (Debian/Ubuntu):**
+```bash
+sudo apt update
+sudo apt install yara
+```
+
+**macOS (Homebrew):**
+```bash
+brew install yara
+```
+
+If you only use the Python API, installing `yara-python` via `pip` is usually sufficient. For advanced features or command-line use, install the system binary as above.
+
 ## Project Structure
 - `sandbox.py` — Main CLI for running analysis and orchestrating static/dynamic checks
 - `gui_sandbox.py` — (Optional) GUI version for interactive analysis

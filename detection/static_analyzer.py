@@ -8,7 +8,7 @@ from datetime import datetime
 class StaticAnalyzer:
     def __init__(self):
         # Set the rules path to the specific directory
-        self.rules_path = r"C:\Users\firda\OneDrive - Strathmore University\Documents\Git1\malware-analysis-sandbox\rules\malware_signatures.yar"
+        self.rules_path = r"C:\Users\firda\OneDrive - Strathmore University\Documents\Git1\Brainwave_Matrix_Intern_T2\rules\malware_signatures.yar"
         self.yara_rules = self._load_yara_rules()
         self.file_magic = magic.Magic()
 

@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class YaraScanner:
-    def __init__(self, rules_dir: str = "rules"):
+    def __init__(self, rules_dir: str = None):
         """
         Initialize YARA scanner with rules from specified directory
         
@@ -17,7 +17,11 @@ class YaraScanner:
             rules_dir: Path to directory containing YARA rules (.yar files)
         """
         self.rules = None
-        self.rules_dir = rules_dir
+        # Use absolute path to rules directory if not provided
+        if rules_dir is None:
+            self.rules_dir = r"C:\Users\firda\OneDrive - Strathmore University\Documents\Git1\Brainwave_Matrix_Intern_T2\rules"
+        else:
+            self.rules_dir = rules_dir
         self._load_rules()
 
     def _load_rules(self) -> bool:
