@@ -1,0 +1,47 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🛡️ Analyze Malware Sample",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/sandbox.py",
+            "args": [
+                "--sample",
+                "${input:samplePath}",
+                "--safe-mode"
+            ],
+            "console": "externalTerminal",
+            "env": {
+                "PYTHONSAFEMODE": "1",
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "preLaunchTask": "validateSamplePath"
+        },
+        {
+            "name": "🐞 Debug Sandbox (Safe Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "sandbox",
+            "args": ["--test-mode"],
+            "justMyCode": false
+        }
+    ],
+    "inputs": [
+        {
+            "id": "samplePath",
+            "type": "promptString",
+            "description": "Enter relative path to sample (e.g., samples/eicar.com)",
+            "default": "samples/test.bin"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "🧪 Full Analysis Suite",
+            "configurations": [
+                "🛡️ Analyze Malware Sample",
+                "🐞 Debug Sandbox (Safe Mode)"
+            ]
+        }
+    ]
+}
