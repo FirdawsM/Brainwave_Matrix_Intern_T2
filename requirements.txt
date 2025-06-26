@@ -1,0 +1,4 @@
+yara-python
+python-magic
+pefile
+PyQt6
